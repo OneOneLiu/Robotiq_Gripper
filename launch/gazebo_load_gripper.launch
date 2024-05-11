@@ -4,12 +4,12 @@
     <!-- Gazebo options -->
     <!-- Note: if you set paused to be true, remember to unpause the simulation in the gui to start the simulation-->
     <arg name="paused" default="false" doc="Start Gazebo paused"/>
-    <param name="robot_description" command="$(find xacro)/xacro $(find pkg_gripper)/urdf/robotiq_description.xacro" />
+    <param name="robot_description" command="$(find xacro)/xacro $(find robotiq_gripper)/urdf/robotiq_description.xacro" />
     <!-- Publish fake joints and tf -->
     <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <!-- Start Rviz -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find pkg_gripper)/config/gripper.rviz" required="true" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robotiq_gripper)/config/gripper.rviz" required="true" />
 
     <!-- Start Gazebo paused to allow the controllers to pickup the initial pose -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch" pass_all_args="true">
