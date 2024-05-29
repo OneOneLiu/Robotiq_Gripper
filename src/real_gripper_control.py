@@ -29,7 +29,9 @@ class GripperControl:
 
         # Subscribe to the real gripper's input to reflect its state in RViz
         rospy.Subscriber('Robotiq2FGripperRobotInput', inputMsg.Robotiq2FGripper_robot_input, self.rviz_callback)
-
+        
+        # Wait for the gripper to be ready
+        rospy.sleep(1)
         # Send reset and activate command
         self.reset_gripper()
         self.activate_gripper()
@@ -76,7 +78,7 @@ def main():
     # Demo: create slider to control the gripper
     master = tk.Tk()
     master.title("Robotiq Gripper Control")
-    slider = ttk.Scale(master, from_=0, to=255, orient="horizontal", command=gripper.control_gripper)
+    slider = ttk.Scale(master, from_=0, to=255, orient="horizontal", command=gripper.control_gripper, length=300)
     slider.pack(fill=tk.X, expand=True)
     master.mainloop()
 
