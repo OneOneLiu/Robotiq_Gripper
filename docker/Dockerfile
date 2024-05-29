@@ -27,6 +27,9 @@ RUN mkdir -p /catkin_ws/src && \
     apt install ros-noetic-rqt-controller-manager && \
     apt-get install -y python3-tk
 
+# Install ROS controllers
+RUN apt-get install -y ros-noetic-ros-control ros-noetic-ros-controllers
+
 # Use rosdep to install all dependencies according to the package.xml files in all src folders
 # And compile the workspace
 RUN cd /catkin_ws && \
