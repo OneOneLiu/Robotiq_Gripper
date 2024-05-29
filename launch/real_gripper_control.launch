@@ -1,18 +1,24 @@
 <?xml version="1.0" ?>
 
 <launch>
-    <arg name="gui" default="True" />
-    <param name="use_gui" value="$(arg gui)"/>
+    <arg name="enable_rviz" default="1" />
+    <arg name="device_name" default="/dev/ttyUSB0" />
 
     <param name="robot_description" command="$(find xacro)/xacro $(find robotiq_gripper)/urdf/robotiq_description.xacro" />
 
-    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="/source_list">["/gripper/joint_states"]</rosparam>
+    </node>
+
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robotiq_gripper)/config/gripper.rviz" required="true" />
+    <!-- Rviz node -->
+    if "$(arg enable_rviz)" == "1":
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robotiq_gripper)/config/gripper.rviz" required="true" />
 
     <!-- Real Robotiq node -->
-    <arg name="device_name" default="/dev/ttyUSB0" />
-    <node name="robotiq_2f_gripper_control_node" pkg="robotiq_2f_gripper_control" type="Robotiq2FGripperRtuNode.py" output="screen" args="$(arg device_name)" />
+    <node name="robotiq_2f_gripper_driver_node" pkg="robotiq_2f_gripper_control" type="Robotiq2FGripperRtuNode.py" output="screen" args="$(arg device_name)" />
+
+    <node name="robotiq_gripper_controller" pkg="robotiq_gripper" type="real_gripper_control.py" output="screen" args="$(arg enable_rviz)" />
 
 </launch>
