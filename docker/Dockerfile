@@ -22,18 +22,12 @@ RUN mkdir -p /catkin_ws/src && \
     cp -r robotiq/robotiq_description/  .&& \
     rm -rf robotiq && \
     git clone https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins && \
+    git clone https://github.com/TAMS-Group/robotiq.git && \
     apt-get install -y ros-noetic-soem && \
     apt-get install ros-noetic-socketcan-interface && \
     apt install ros-noetic-rqt-controller-manager && \
-    apt-get install -y python3-tk
-
-
-# Install the required packages for the real robotiq gripper
-RUN cd /catkin_ws/src && \
-git clone https://github.com/TAMS-Group/robotiq.git
-
-# Install ROS controllers
-RUN apt-get install -y ros-noetic-ros-control ros-noetic-ros-controllers
+    apt-get install -y python3-tk && \
+    apt-get install -y ros-noetic-ros-control ros-noetic-ros-controllers
 
 # Use rosdep to install all dependencies according to the package.xml files in all src folders
 # And compile the workspace
