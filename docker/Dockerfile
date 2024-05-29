@@ -27,6 +27,11 @@ RUN mkdir -p /catkin_ws/src && \
     apt install ros-noetic-rqt-controller-manager && \
     apt-get install -y python3-tk
 
+
+# Install the required packages for the real robotiq gripper
+RUN cd /catkin_ws/src && \
+git clone https://github.com/TAMS-Group/robotiq.git
+
 # Install ROS controllers
 RUN apt-get install -y ros-noetic-ros-control ros-noetic-ros-controllers
 

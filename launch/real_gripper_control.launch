@@ -10,4 +10,9 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robotiq_gripper)/config/gripper.rviz" required="true" />
+
+    <!-- Real Robotiq node -->
+    <arg name="device_name" default="/dev/ttyUSB0" />
+    <node name="robotiq_2f_gripper_control_node" pkg="robotiq_2f_gripper_control" type="Robotiq2FGripperRtuNode.py" output="screen" args="$(arg device_name)" />
+
 </launch>
