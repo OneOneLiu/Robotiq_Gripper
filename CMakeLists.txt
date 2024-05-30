@@ -162,6 +162,7 @@ include_directories(
 catkin_install_python(PROGRAMS
   src/sim_gripper_control.py
   src/real_gripper_control.py
+  src/gripper_joint_state_publisher.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
