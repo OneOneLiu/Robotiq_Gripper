@@ -17,7 +17,7 @@ class RobotiqGripperStatePublisher:
     def joint_state_publisher(self, data):
         """Publish the gripper joint state in ROS."""
         # 计算对应的joint angle范围从0到0.8
-        position = (data.gPO / 255.0) * 0.8
+        position = (data.gPR / 255.0) * 0.8
         
         joint_state = JointState()
         joint_state.header.stamp = rospy.Time.now()
