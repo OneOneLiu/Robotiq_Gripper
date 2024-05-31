@@ -22,18 +22,21 @@ class GripperControl:
                                 command=self.control_gripper)
         self.slider.pack(fill=tk.X, expand=True)  # Add some padding around the slider
 
-    def control_gripper(self, value):
+    def control_gripper(self, open_witdth):
+        """Control the gripper position.
+        @open_witdth: the width of the gripper opening in the range [0, 0.8].
+        """
         # Prepare the message
         msg = FollowJointTrajectoryActionGoal()
         msg.goal.trajectory.joint_names = ["robotiq_85_left_knuckle_joint"] 
         point = JointTrajectoryPoint()
-        point.positions = [float(value)]
+        point.positions = [float(open_witdth)]
         point.time_from_start = rospy.Duration(1.0)
         msg.goal.trajectory.points.append(point)
         
         # Publish the message
         self.publisher.publish(msg)
-        rospy.loginfo("Sent gripper command: %f", float(value))
+        rospy.loginfo("Sent gripper command: %f", float(open_witdth))
 
 def main():
     root = tk.Tk()

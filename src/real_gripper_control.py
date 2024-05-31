@@ -35,8 +35,10 @@ class GripperControl:
         self.pub.publish(activate_command)
         rospy.sleep(1)  # Ensure the command has time to be processed
 
-    def control_gripper(self, val):
-        """Control the gripper position."""
+    def control_gripper(self, open_witdth):
+        """Control the gripper position.
+        @open_witdth: the width of the gripper opening in the range [0, 255].
+        """
         command = outputMsg.Robotiq2FGripper_robot_output(rACT=1, rGTO=1, rSP=255, rFR=150, rPR=int(float(val)))
         self.pub.publish(command)
 
