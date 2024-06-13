@@ -14,6 +14,9 @@ This ROS package facilitates the simulation and control of a Robotiq gripper, al
 The control of real gripper is implemented from this [repository](https://github.com/TAMS-Group/robotiq.git). 
 
 ## 3. Quick Start
+
+Connect the robotiq gripper to the host machine through USB. And then start docker container
+
 ```bash {.line-numbers}
 # Visualize in RViz:
 roslaunch robotiq_gripper vis_gripper.launch
