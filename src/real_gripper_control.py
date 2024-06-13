@@ -39,7 +39,7 @@ class GripperControl:
         """Control the gripper position.
         @open_witdth: the width of the gripper opening in the range [0, 255].
         """
-        command = outputMsg.Robotiq2FGripper_robot_output(rACT=1, rGTO=1, rSP=255, rFR=150, rPR=int(float(val)))
+        command = outputMsg.Robotiq2FGripper_robot_output(rACT=1, rGTO=1, rSP=255, rFR=150, rPR=int(float(open_witdth)))
         self.pub.publish(command)
 
 def main():
